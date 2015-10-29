@@ -1,0 +1,10 @@
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\MusicStore.Models.dll.config
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\MusicStore.Models.dll
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\MusicStore.Models.pdb
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\EntityFramework.dll
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\EntityFramework.xml
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\obj\Debug\MusicStore.Models.csprojResolveAssemblyReference.cache
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\obj\Debug\MusicStore.Models.dll
+D:\Dropbox\education\Chapter14_Web-Services-and-Cloud\Web-Services-and-Cloud-HW\2. ASP.NET-Web-API\MusicStore\MusicStore.Models\obj\Debug\MusicStore.Models.pdb
