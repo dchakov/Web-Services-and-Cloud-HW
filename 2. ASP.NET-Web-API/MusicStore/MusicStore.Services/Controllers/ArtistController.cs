@@ -5,16 +5,16 @@
     using MusicStore.Models;
     using System.Web.Http;
 
-    public class AlbumController : ApiController
+    public class ArtistController : ApiController
     {
-        private IGenericRepository<Album> repository;
+        private IGenericRepository<Artist> repository;
 
-        public AlbumController()
+        public ArtistController()
         {
-            this.repository = new GenericRepository<Album>();
+            this.repository = new GenericRepository<Artist>();
         }
 
-        public AlbumController(IGenericRepository<Album> repository)
+        public ArtistController(IGenericRepository<Artist> repository)
         {
             this.repository = repository;
         }
@@ -32,58 +32,57 @@
         }
 
         [HttpPost]
-        public IHttpActionResult Post([FromBody]AlbumRequestModel album)
+        public IHttpActionResult Post([FromBody]ArtistRequestModel artist)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            var newAlbum = new Album
+            var newArtist = new Artist
             {
-                Title = album.Title,
-                Year = album.Year,
-                Producer = album.Producer,
-                Artists = album.Artists,
-                Songs = album.Songs
+                Name = artist.Name,
+                Country = artist.Country,
+                DateOfBirth = artist.DateOfBirth,
+                Albums = artist.Albums
             };
 
-            this.repository.Insert(newAlbum);
+            this.repository.Insert(newArtist);
             this.repository.SaveChanges();
 
-            return this.Ok(newAlbum);
+            return this.Ok(newArtist);
         }
 
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody]AlbumRequestModel album)
+        public IHttpActionResult Put(int id, [FromBody]ArtistRequestModel artist)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
-            var currentAlbum = this.repository.SelectById(id);
+            var currentArtist = this.repository.SelectById(id);
 
-            if (currentAlbum == null)
+            if (currentArtist == null)
             {
                 return this.BadRequest("Invalid Id");
             }
 
-            currentAlbum.Title = string.IsNullOrEmpty(album.Title) ? currentAlbum.Title : album.Title;
-            currentAlbum.Year = album.Year;
-            currentAlbum.Producer = string.IsNullOrEmpty(album.Producer) ? currentAlbum.Producer : album.Producer;
+            currentArtist.Name = string.IsNullOrEmpty(artist.Name) ? currentArtist.Name : artist.Name;
+            currentArtist.DateOfBirth = artist.DateOfBirth;
+            currentArtist.Country = string.IsNullOrEmpty(artist.Country) ? currentArtist.Country : artist.Country;
 
-            this.repository.Update(currentAlbum);
+            this.repository.Update(currentArtist);
             this.repository.SaveChanges();
-            return this.Ok(currentAlbum);
+            return this.Ok(currentArtist);
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var album = this.repository.SelectById(id);
+            var artist = this.repository.SelectById(id);
 
-            if (album == null)
+            if (artist == null)
             {
                 return this.BadRequest("Invalid id");
             }

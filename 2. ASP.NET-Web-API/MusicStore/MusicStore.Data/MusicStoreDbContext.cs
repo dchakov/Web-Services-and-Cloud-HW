@@ -15,6 +15,5 @@
         public virtual IDbSet<Song> Songs { get; set; }
 
         public virtual IDbSet<Album> Albums { get; set; }
-
     }
 }
