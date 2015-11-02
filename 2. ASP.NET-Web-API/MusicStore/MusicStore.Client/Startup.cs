@@ -26,6 +26,8 @@
             UpdateAlbum();
 
             DeleteAlbum(13);
+
+            GetAllAlbumsXML();
         }
 
         private static void DeleteAlbum(int Id)
@@ -124,6 +126,30 @@
                         Console.WriteLine("{0,4} {1,-20} {2} {3}",
                             album.Id, album.Title, album.Producer, album.Year);
                     }
+                }
+                else
+                {
+                    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                }
+            }
+        }
+
+        private static void GetAllAlbumsXML()
+        {
+            Console.WriteLine("All albums XML");
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:57271/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+
+                HttpResponseMessage response = client.GetAsync("api/album").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var albums = response.Content.ReadAsStringAsync();
+                    Console.WriteLine(albums.Result);
+                   
                 }
                 else
                 {
