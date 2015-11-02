@@ -3,6 +3,7 @@
     using Models;
     using MusicStore.Data;
     using MusicStore.Data.Migrations;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -18,37 +19,28 @@
             //var db = new MusicStoreDbContext();
             //db.Albums.Count();
 
-            var client = new HttpClient()
-            {
-                BaseAddress = new Uri("http://localhost:57271/")
-            };
+            GetAllAlbums();
 
-            GetAllAlbums(client);
+            PostAlbum();
 
-            PostAlbum(client);
+            UpdateAlbum();
 
-            UpdateAlbum(client);
-
-            //DeleteAlbum(client);
+            DeleteAlbum(13);
         }
 
-        private static async void UpdateAlbum(HttpClient client)
+        private static void DeleteAlbum(int Id)
         {
-            Console.WriteLine("Update album");
-            using (client)
+            Console.WriteLine("Delete album");
+            using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri("http://localhost:57271/");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var album = new Album()
-                {
-                    Title = "R",
-                    Year = 2000
-                };
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/album/2", album);
+                HttpResponseMessage response = client.DeleteAsync("api/album/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Post succsessful");
+                    Console.WriteLine("Delete succsessful");
                 }
                 else
                 {
@@ -57,11 +49,39 @@
             }
         }
 
-        private static void PostAlbum(HttpClient client)
+        private static void UpdateAlbum()
+        {
+            Console.WriteLine("Update album");
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:57271/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var album = new Album()
+                {
+                    Title = "New",
+                    Year = 1997
+                };
+                HttpResponseMessage response = client.PutAsJsonAsync("api/album/2", album).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Update succsessful");
+                }
+                else
+                {
+                    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                }
+            }
+        }
+
+        private static void PostAlbum()
         {
             Console.WriteLine("Post album");
-            using (client)
+            using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri("http://localhost:57271/");
+                client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var album = new Album()
@@ -70,7 +90,10 @@
                     Year = 2009,
                     Producer = "Eddy"
                 };
-                HttpResponseMessage response = client.PostAsJsonAsync("api/album", album).Result;
+
+                var postContent = new StringContent(JsonConvert.SerializeObject(album));
+                postContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                HttpResponseMessage response = client.PostAsync("api/album", postContent).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -82,11 +105,13 @@
                 }
             }
         }
-        private static void GetAllAlbums(HttpClient client)
+
+        private static void GetAllAlbums()
         {
             Console.WriteLine("All albums");
-            using (client)
+            using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri("http://localhost:57271/");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = client.GetAsync("api/album").Result;

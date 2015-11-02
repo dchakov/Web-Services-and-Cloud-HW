@@ -6,8 +6,8 @@
 
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private MusicStoreDbContext db = null;
-        private DbSet<T> table = null;
+        private MusicStoreDbContext db;
+        private DbSet<T> table;
 
         public GenericRepository()
         {
