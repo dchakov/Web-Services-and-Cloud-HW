@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FeedZilla")]
+[assembly: AssemblyTitle("JsonPlaceHolder")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FeedZilla")]
+[assembly: AssemblyProduct("JsonPlaceHolder")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a6d070ac-9783-4d27-957b-b3d095d5d4b0")]
+[assembly: Guid("cb8b0667-9d7f-42d2-9730-738c6792e3a9")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -1,8 +1,8 @@
-﻿namespace FeedZilla
+﻿namespace JsonPlaceHolder
 {
     using Newtonsoft.Json;
 
-    public class Article
+    public class Album
     {
         [JsonProperty("title")]
         public string Title { get; set; }

@@ -3,12 +3,11 @@
     using FeedZilla;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class StartUp
     {
@@ -22,16 +21,18 @@
             int count = 10;
             string qureyString = "iphone";
 
-            SearchForArticles(qureyString, count);
+            string uriFaroo = "http://www.faroo.com/api?q=" + qureyString + "&start=1&length=" + count + "&l=en&src=news&f=json";
+            string uriFeedzilla = "http://api.feedzilla.com/v1/categories/26/articles/search.json?q=" + qureyString;
+
+            SearchForArticlesHttpClient(qureyString, count, uriFaroo);
+            SearchForArticlesHttpWebRequest(qureyString, count, uriFaroo);
         }
 
-        private static void SearchForArticles(string qureyString, int count)
+        private static void SearchForArticlesHttpClient(string qureyString, int count, string uri)
         {
             Console.WriteLine("Articles:");
             using (var client = new HttpClient())
             {
-                string uri = "http://www.faroo.com/api?q=" + qureyString + "&start=1&length=" + count + "&l=en&src=news&f=json";
-                string uriFeedzilla = "http://api.feedzilla.com/v1/categories/26/articles/search.json?q=";
                 client.BaseAddress = new Uri(uri);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -50,6 +51,34 @@
                 {
                     Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
                 }
+            }
+        }
+
+        private static void SearchForArticlesHttpWebRequest(string qureyString, int count, string uri)
+        {
+            Console.WriteLine("Articles:");
+
+
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                using (var responseStream = request.GetResponse().GetResponseStream())
+                {
+                    using (var reader = new StreamReader(responseStream))
+                    {
+                        var fzResult = JsonConvert.DeserializeObject<FZResult>(reader.ReadToEnd());
+
+                        fzResult.Articles
+                            .Take(count)
+                            .ToList()
+                            .ForEach(a => Console.WriteLine("{0} {1}", a.Title, a.Url));
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                var response = ex.Response as HttpWebResponse;
+                Console.WriteLine(response.StatusCode);
             }
         }
     }
