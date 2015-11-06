@@ -19,7 +19,7 @@
 
         private static void SearchForArticles(string qureyString, int count)
         {
-            Console.WriteLine("Albums:");
+            Console.WriteLine("Albums....");
             using (var client = new HttpClient())
             {
                 string uri = "http://jsonplaceholder.typicode.com/photos";
