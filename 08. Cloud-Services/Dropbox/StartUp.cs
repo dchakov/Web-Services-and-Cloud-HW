@@ -45,7 +45,6 @@
             var picUrl = client.GetShare(metaData.Path);
             Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
              picUrl.Url);
-            client.Delete("Pictures");
         }
     }
 }
