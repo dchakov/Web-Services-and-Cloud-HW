@@ -38,7 +38,7 @@
                 var bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, (int)stream.Length);
 
-                client.UploadFile(metaData.ToString(), item.Substring(6), bytes);
+                client.UploadFile("/" + metaData.Name.ToString(), item.Substring(6), bytes);
 
                 stream.Close();
             }
